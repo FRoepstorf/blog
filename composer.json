@@ -12,7 +12,9 @@
         "php": "^8.2",
         "laravel/framework": "^11",
         "laravel/tinker": "^2.9",
-        "statamic/cms": "^5.0"
+        "spatie/fork": "^1.2",
+        "statamic/cms": "^5.0",
+        "statamic/ssg": "^3.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8.1",

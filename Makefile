@@ -23,16 +23,12 @@ phpstan: ## Runs phpstan
 test:  ## Runs phpunit
 	ddev exec vendor/bin/pest --compact --parallel
 
-storage/tests/database/database.sqlite: ## Creates the test database
-	mkdir -p storage/tests/database
-	touch storage/tests/database/database.sqlite
-
-.PHONY: migrate
-migrate: ## Runs migrations
-	ddev exec php artisan migrate
-
-dbFresh: ## Drops and recreates the database
-	ddev exec php artisan migrate:fresh
+.PHONY: deploy
+deploy:
+	ddev exec ./artisan cache:clear
+	ddev exec ./please stache:refresh
+	ddev exec ./please ssg:generate
+	cd infrastructure && cdk deploy --profile sandbox-admin
 
 .PHONY: help
 help:
