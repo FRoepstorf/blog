@@ -4,6 +4,8 @@
 /public/hot
 /public/storage
 /public/vendor/statamic
+/public/vendor/statamic-responsive-images
+/public/img
 /storage/*.key
 /vendor
 .env
