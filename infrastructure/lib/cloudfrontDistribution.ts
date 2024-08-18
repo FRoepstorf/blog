@@ -19,10 +19,23 @@ export class CloudfrontDistribution extends Construct {
             runtime: cdk.aws_cloudfront.FunctionRuntime.JS_2_0,
         });
 
+        const responseHeadersPolicy = new cdk.aws_cloudfront.ResponseHeadersPolicy(this, 'ResponseHeadersPolicy', {
+            customHeadersBehavior: {
+                customHeaders: [
+                    {
+                        header: 'Cache-Control',
+                        value: 'max-age=3600, stale-while-revalidate=600, stale-if-error=86400',
+                        override: true
+                    },
+                ]
+            },
+        })
+
         this.distribution = new cdk.aws_cloudfront.Distribution(this, 'AssetDistribution', {
             defaultRootObject: 'index.html',
             defaultBehavior: {
                 origin: new cdk.aws_cloudfront_origins.S3Origin(bucket, {originAccessIdentity}),
+                responseHeadersPolicy,
                 functionAssociations: [
                     {
                         function: cloudfrontFunction,

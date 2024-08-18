@@ -1,8 +1,12 @@
 <!doctype html>
-<html>
+<html lang="{{ site:short_locale }}">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="POC for serving static statamic sites">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>{{ title }}</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    {{ vite src="resources/css/site.css" }}
 </head>
 <body class="bg-gray-900 text-white text-lg font-mono">
 <nav class="bg-black text-xs uppercase text-green text-center flex items-center justify-center space-x-4">

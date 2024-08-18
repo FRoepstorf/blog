@@ -18,6 +18,7 @@ tabs:
               type: markdown
               display: Content
               localizable: true
+              smartypants: true
           -
             handle: author
             field:
@@ -35,10 +36,8 @@ tabs:
           -
             handle: featured_image
             field:
-              max_files: 1
-              container: assets
-              type: assets
-              display: 'Featured image'
+              type: responsive
+              display: 'Featured Image'
   sidebar:
     display: Sidebar
     sections:

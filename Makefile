@@ -1,7 +1,11 @@
 .DEFAULT_GOAL := help
 
 .PHONY: ci
-ci: rector csfix test
+ci: rector csfix
+
+init: vendor
+	npm install
+	cd infrastructure && npm install
 
 vendor: composer.json composer.lock ## Installs composer dependencies
 	ddev composer validate
@@ -15,18 +19,19 @@ csfix: ## runs pint cs fixer
 rector: ## Runs rector
 	ddev exec vendor/bin/rector
 
-.PHONY: phpstan
-phpstan: ## Runs phpstan
-	ddev exec vendor/bin/phpstan analyse
-
 .PHONY: test
-test:  ## Runs phpunit
+test:  ## Runs pest
 	ddev exec vendor/bin/pest --compact --parallel
 
+.PHONY: cdkTest
+cdkTest:
+	cd infrastructure && tsc && npm run test
+
 .PHONY: deploy
-deploy:
+deploy: ci cdkTest ## Deploys the application
 	ddev exec ./artisan cache:clear
 	ddev exec ./please stache:refresh
+	npm run build
 	ddev exec ./please ssg:generate
 	cd infrastructure && cdk deploy --profile sandbox-admin
 

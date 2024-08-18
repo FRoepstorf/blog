@@ -8,7 +8,7 @@ export class AssetBucket extends Construct {
         super(scope, id);
 
         this.bucket = new cdk.aws_s3.Bucket(this, 'AssetBucket', {
-            versioned: true,
+            versioned: false,
             removalPolicy: cdk.RemovalPolicy.RETAIN,
             accessControl: cdk.aws_s3.BucketAccessControl.PRIVATE,
         });

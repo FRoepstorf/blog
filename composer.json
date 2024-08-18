@@ -13,6 +13,7 @@
         "laravel/framework": "^11",
         "laravel/tinker": "^2.9",
         "spatie/fork": "^1.2",
+        "spatie/statamic-responsive-images": "^5.0",
         "statamic/cms": "^5.0",
         "statamic/ssg": "^3.0"
     },
